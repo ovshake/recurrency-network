@@ -4,3 +4,12 @@ https://www.outlookindia.com/outlookmoney/archive/the-basics-of-currency-futures
 https://in.investing.com/currencies/usd-inr-historical-data
 https://www.fpi.nsdl.co.in/web/Reports/Monthly.aspx
 https://www.quandl.com/data/NSDL/DIF-Foreign-Portfolio-Investors-Derivative-Trades-Index-Futures
+
+Inflation/Interest
+==================
+https://www.inflation.eu/inflation-rates/india/historic-inflation/cpi-inflation-india-2018.aspx
+
+ARIMA and RNNs
+==============
+https://aws.amazon.com/blogs/machine-learning/forecasting-time-series-with-dynamic-deep-learning-on-aws/
+https://arxiv.org/pdf/1704.04110.pdf
