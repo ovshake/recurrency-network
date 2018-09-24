@@ -1,0 +1,6 @@
+Currency Futures
+================
+https://www.outlookindia.com/outlookmoney/archive/the-basics-of-currency-futures-290220
+https://in.investing.com/currencies/usd-inr-historical-data
+https://www.fpi.nsdl.co.in/web/Reports/Monthly.aspx
+https://www.quandl.com/data/NSDL/DIF-Foreign-Portfolio-Investors-Derivative-Trades-Index-Futures
