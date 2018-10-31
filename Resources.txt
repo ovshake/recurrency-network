@@ -9,6 +9,11 @@ Inflation/Interest
 ==================
 https://www.inflation.eu/inflation-rates/india/historic-inflation/cpi-inflation-india-2018.aspx
 
+Data
+====
+https://fred.stlouisfed.org/tags/series?t=india%3Binterest+rate%3Bmonthly
+https://data.worldbank.org/indicator/BX.KLT.DINV.WD.GD.ZS?end=2017&locations=US&name_desc=true&start=1975&view=chart
+
 ARIMA and RNNs
 ==============
 https://aws.amazon.com/blogs/machine-learning/forecasting-time-series-with-dynamic-deep-learning-on-aws/
