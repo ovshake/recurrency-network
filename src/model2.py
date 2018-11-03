@@ -55,6 +55,9 @@ clf = GridSearchCV(svc, parameters, cv=5)
 
 clf.fit(X_train, y_train)
 
+results = clf.cv_results_ 
+df = pd.from_dict(results) 
+df.to_csv("GridSearchResults.csv") 
 print (clf.get_params())
 
 y_pred = clf.predict(X_test)
