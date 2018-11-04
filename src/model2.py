@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.svm import SVC
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import accuracy_score, make_scorer
 
 data = pd.read_csv('../data/ReCurrency-dataset-with-usa-inf-fdi.csv', index_col = 0)
 data = data[:2121]
@@ -51,7 +52,7 @@ parameters = {'C' : C, 'gamma' : gamma}
 
 svc = SVC(kernel='rbf')
 
-clf = GridSearchCV(svc, parameters, cv=5)
+clf = GridSearchCV(svc, parameters, cv=5 , verbose = 1, scoring = make_scorer(accuracy_score))
 
 clf.fit(X_train, y_train)
 
