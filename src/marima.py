@@ -13,16 +13,13 @@ warnings.filterwarnings("ignore")
 
 train_data = pd.read_csv('../data/train_data.csv' , index_col = 0)
 test_data = pd.read_csv('../data/test_data.csv' ,index_col = 0)
+train_set = train_data.iloc[:,1:].values
+test_set = test_data.iloc[: , 1:].values
 
 
-train_set = train_data.iloc[:,-1].values
-test_set = test_data.iloc[:, -1].values
 
-
-train_set = train_set.reshape(-1, 1)
-test_set = test_set.reshape(-1, 1)
-
-
+# print(test_set)
+# print(train_set.shape)
 
 train_sc = MinMaxScaler()
 test_sc = MinMaxScaler()
@@ -33,48 +30,35 @@ max_test = test_sc.data_max_[-1]
 print(max_test , min_test)
 num_samples = train_set_sc.shape[0]
 num_features = train_set_sc.shape[1]
-
-def evaluate_model(order):
-
-	model = ARIMA(endog=train_set_sc[:, -1], order=order)
-	model_fit = model.fit()
-
-
-	prediction = model_fit.predict(start=2, end=test_set.shape[0]+1)
-	prediction = test_sc.inverse_transform(prediction.reshape(-1, 1))
-	yhat = prediction[: , -1]
-
-	y_true = test_set[: , -1]
-
-	#print (yhat)
-	mse = np.sqrt(mean_squared_error(y_true, yhat))
-	print ("order:", str(order), ", error:", mse)
-
-	return mse
+# X_train = train_set_sc[:, :6]
+# X_train = X_train[:-1] 
+# Y_train =  train_set_sc[: , -1]
+# Y_train = Y_train[1:]
+# X_test = test_set_sc[:, :6]
+# X_test = X_test[:-1] 
+# Y_test =  test_set_sc[: , -1]
+# Y_test = Y_test[1:]
+# print(Y_train)
+# adf = sm.tsa.stattools.adfuller(Y_train,autolag = 't-stat')
+# print(adf)
 
 
 res = coint_johansen(train_set_sc, -1 , 1).eig
+# print(res)
 
-best_score = 329423432424978423
-best_order = 0
-i = [0, 1, 2, 4, 6, 8, 10]
-j = range(0, 3)
-k = range(0, 3)
+model = VAR(endog=train_set_sc)
 
-for p in i:
-	for d in j:
-		for q in k:
-			order = (p,d,q)
-			try:
-				mse = evaluate_model(order)
-				if mse < best_score:
-					best_score = mse
-					best_order = order
-			except:
-				continue
-print (best_score, best_order)
+model_fit = model.fit()
+prediction = model_fit.forecast(model_fit.y, steps=len(test_set_sc))
+prediction = test_sc.inverse_transform(prediction)
+yhat = prediction[: , -1]
+# print(yhat)
+y_true = test_set[: , -1]
+# print(y_true)
+print (yhat)
 
-"""
+print (np.sqrt(mean_squared_error(y_true, yhat)))
+
 plt.plot(y_true, color='red', label='Actual Exchange Rate')
 plt.plot(yhat, color='blue', label='Predicted Exchange Rate')
 plt.title("USD/INR Exchange Rate prediction")
@@ -83,7 +67,7 @@ plt.ylabel("Exchange Rate")
 #plt.ylim(64.4, 64.5)
 plt.legend()
 plt.show()
-"""
+
 #for i in range(len(yhat)):
 #	print(abs(yhat[i] - y_true[i]))
 # print(prediction)
